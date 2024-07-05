@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Personal Task Manager</title>
+      <style>
+            body{
+                  background-color: #e0e0e0;
+            }
+            .heading{
+
+                  color: rgb(0, 0, 114);
+                  text-align: center;
+                  border-radius: 40 px;
+                  font-size: medium;
+                  font-family: Arial, sans-serif;
+                  background-color: #e5f1fa;
+                  border: 1.5px double gray;
+                  width: auto;
+                  height: 75px;
+            }
+            .links{
+                  font-family: Arial, sans-serif;
+                  text-align: right;
+                  border: 2px;
+            }
+            .searchbar{
+                  display: flex;
+                  justify-content: center ;
+                  align-items: center;
+            }
+            .container {
+                  font-family: Arial, sans-serif;
+                  width: 100%;
+                  margin: auto;
+                  overflow: visible;
+            }
+            .searchtab {
+                  padding: 10px;
+                  width: 1350px;
+                  font-size: 15px;
+                  margin-right: 10px;
+                  background-color: #90c6f1;
+                  border-radius: 3px;
+            }
+            .search {
+                  padding: 10px;
+                  font-size: 15px;
+                  border-radius: 10%;
+                  background-color: #63ace8;
+            }
+
+            #task-form {
+                  margin: 20px 0;
+            }
+            #task-form input[type="text"] {
+                  padding: 10px;
+                  margin-left: 15px;
+                  width: 91%;
+                  border: 1px solid #ccc;
+            }
+            #task-form input[type="submit"] {
+                  padding: 10px;
+                  background-color: #333;
+                  color: white;
+                  border: none;
+            }
+            #tasks {
+                  list-style: none;
+                  padding: 0;
+            }
+            
+            .delete-task {
+                  float: right;
+                  color: green;
+                  cursor: pointer;
+            }
+            
+            footer {
+                  font-family: Arial, sans-serif;
+                  background-color: #333;
+                  color: #90c6f1;
+                  text-align: center;
+                  padding: 1.5px 0;
+                  position: fixed;
+                  bottom: 0;
+                  left: 0%;
+                  width: 100%;
+            }
+
+            /*Scheduling the tasks*/
+            .scheduler{
+                  border: 4px solid black;
+                  display: flex;
+                  flex-direction: row;
+                  height: 500px;
+                  gap: 10px 10px;
+                  font-family: Arial, sans-serif;
+                  padding: 5px;
+                  margin: 10px;
+                  font-size: 25px;
+            }
+            .todo{
+                  
+                  border: 2px solid gray;
+                  background-color: #c2e0f9;
+                  flex-grow: 1;
+                  text-align: center;
+            }
+            .inprogress{
+                  border: 2px solid gray;
+                  background-color: #c2e0f9;
+                  flex-grow: 1;
+                  text-align: center;
+            }
+            .completed{
+                  border: 2px solid gray;
+                  background-color: #c2e0f9;
+                  flex-grow: 1;
+                  text-align: center;
+            }
+            /*Inside the To Do Box and In Progress Box*/
+            .desc{
+                  margin: 20px;
+                  font-size: 15px;
+                  text-align: left;
+                  border: 2px solid black;
+                  background-color: gray;
+                  height: auto;
+                  width: auto;
+                  padding: 10px 10px 10px 10px;
+            }
+            .control{
+                  display: flex;
+                  font-size: 20px;
+                  gap: 45px;
+                  justify-items: center;
+                  flex-direction: row;
+                  margin: 5px 5px 0px 0px;
+                  margin-top: 8px;
+            }
+
+            /* toggle button */
+
+            .toggle{
+                  display: flex;
+                  justify-content: end;
+            }
+
+            .dark{
+                  background-color: black;
+                  color: white;
+            }
+
+            .light{
+                  background-color: #e0e0e0;
+                  color: black;
+            }
+
+            /* Fact box */
+            .factbox{
+                  border: 1px solid rgb(79, 79, 79);
+                  background-color: #333;
+                  color: #fff;
+                  border-radius: 5px;
+                  margin-left: 100px;
+                  margin-right: 100px;
+                  display: flex;
+                  align-items: center;
+                  flex-direction: column;
+            }
+            #generate-btn{
+                  width: 180px;
+            }
+
+      </style>
+</head>
+<body>
+      <nav>
+            <div class="container">
+                  <div class="links">
+                        <a href="index.html" target="blank">Home</a>
+                        <a href="about.html" target="blank">About</a>
+                        <a href="about.html" target="blank">Deleted Tasks</a>
+                  </div>
+                  <div class="searchbar">
+                        <form action="#">
+                              <input type="search" class="searchtab" placeholder="Search tasks..." name="search">
+                              <input type="submit" class="search" value="Search">
+                        </form>
+                  </div>
+            </div>
+      </nav>
+      <br>
+      <div class = "toggle">
+            <button id="mode">
+                  Click here to change mode
+            </button>
+      </div>
+      <br>
+      <div class="factbox">
+            <p id="fact"></p>
+            <button id="generate-btn">!Generate Random Fact!</button>
+      </div>
+      <br>
+      <!-- <hr> -->
+      <header>
+            <div class="heading">
+                  <h1>--Manage your tasks--</h1>
+            </div>
+      </header>
+
+
+      <div class="container">
+            <form id="task-form">
+                  <input type="text" id="task" placeholder="Add a new task...">
+                  <input type="submit" value="Add Task">
+            </form>
+            
+      </div>
+
+      <div class="scheduler">
+            <div class="todo">
+                  <p>To Do</p>
+                  <div class="desc">
+                        <!-- <p>Your to-do's here!</p> -->
+                        <ul id="tasks">
+                              <!-- Tasks will be added here dynamically -->
+                        </ul>
+                        <div class="control">
+                              <div class="left"><</div>
+                              <div class="edit">&#x270E;</div>
+                              <div class="bin">&#x1F5D1</div>
+                              <div class="right">></div>
+                        </div>
+                  </div>
+                  
+            </div>
+            <div class="inprogress">
+                  <p>In Progress</p>
+                  <div class="desc">
+                        <p>Do Laundry</p>
+                        <div class="control">
+                              <div class="left"><</div>
+                              <div class="edit">&#x270E;</div>
+                              <div class="bin">&#x1F5D1</div>
+                              <div class="right">></div>
+                        </div>
+                  </div>
+            </div>
+            <div class="completed">
+                  <p>Completed</p>
+            </div>
+      </div>
+<br>
+<br>
+<br>
+<!-- personal info using html -->
+<form id="myForm" onsubmit="return validateForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
+      <span id="nameError" class="error"></span><br><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+      <span id="emailError" class="error"></span><br><br>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+      <span id="phoneError" class="error"></span><br><br>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob">
+      <span id="dobError" class="error"></span><br><br>
+
+      <input type="submit" value="Submit">
+      </form>
+
+<!-- attaching js files -->
+<script src="api.js"></script>
+<script src="code.js"></script>
+<br>
+<br>
+<br>
+
+
+      <footer>
+            <p>&copy; 2024 Personal Task Manager. All rights reserved.</p>
+      </footer>
+</body>
+</html>
